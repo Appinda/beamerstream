@@ -1,0 +1,54 @@
+type Song {
+  name: String!
+}
+
+type Size {
+  width: Int!
+  height: Int!
+}
+
+type Rectangle {
+  x: Int!
+  y: Int!
+  width: Int!
+  height: Int!
+}
+
+type Display {
+  id: Int!
+  label: String
+  bounds: Rectangle
+  accelerometerSupport: String!
+  colorDepth: Int!
+  colorSpace: String!
+  depthPerComponent: Int!
+  displayFrequency: Int!
+  internal: Boolean!
+  monochrome: Boolean!
+  rotation: Int!
+  scaleFactor: Int!
+  size: Size!
+  touchSupport: String!
+  workArea: Rectangle!
+  workAreaSize: Size!
+}
+
+type Query {
+  "List of songs"
+  songs: [Song]!
+  song(id: String!): Song
+  currentSong: Song
+  currentVerse: String
+  "Can be 'desktop' or 'cloud'"
+  applicationMode: String
+  displays: [Display]
+}
+
+type Mutation {
+  setCurrentVerse(text: String!): String
+}
+
+type Subscription {
+  currentVerseChanged: String
+  hello: String
+}

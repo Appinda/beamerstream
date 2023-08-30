@@ -1,0 +1,1 @@
+{"version":3,"file":"ResourceLoader.d.ts","sourceRoot":"","sources":["../../src/resources/ResourceLoader.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,IAAI,EAAE,MAAM,uBAAuB,CAAC;AAE7C,MAAM,CAAC,OAAO,OAAO,cAAc;IACjC,OAAO,CAAC,iBAAiB;IAEnB,IAAI;IAEJ,QAAQ,IAAI,OAAO,CAAC,IAAI,EAAE,CAAC;IAI3B,OAAO,CAAC,EAAE,EAAE,MAAM,GAAG,OAAO,CAAC,IAAI,GAAG,IAAI,CAAC;CAGhD"}

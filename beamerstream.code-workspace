@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "name": "Library",
+      "path": "./packages/library"
+    },
+    {
+      "name": "Control",
+      "path": "./packages/control"
+    },
+    {
+      "name": "Server",
+      "path": "./packages/server"
+    },
+    {
+      "name": "Desktop",
+      "path": "./packages/desktop"
+    },
+    {
+      "name": " ",
+      "path": "."
+    }
+  ],
+  "settings": {}
+}

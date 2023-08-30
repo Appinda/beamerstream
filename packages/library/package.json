@@ -1,0 +1,16 @@
+{
+  "name": "@beamerstream/library",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.7",
+    "typescript": "^5.2.2"
+  },
+  "files": [
+    "dist/*"
+  ]
+}
