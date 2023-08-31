@@ -26,6 +26,10 @@ export default function ControlPage() {
     });
   }
 
+  function onLituryItemSelect(id: string) {
+    alert(id);
+  }
+
   return (
     <div className="ControlPage grid grid-cols-4 h-full">
       <Window title="Song">
@@ -44,7 +48,7 @@ export default function ControlPage() {
           ))}
         </ul>
       </Window>
-      <Liturgy />
+      <Liturgy onSelectItem={onLituryItemSelect} />
     </div>
   );
 }

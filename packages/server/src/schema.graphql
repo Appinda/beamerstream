@@ -1,5 +1,17 @@
+type Verse {
+  tag: String!
+  text: String!
+}
+
 type Song {
-  name: String!
+  id: String!
+  titles: [String]!
+  authors: [String]!
+  copyright: String
+  ccli: Int
+  comments: String
+  verseOrder: String!
+  lyrics: [Verse]!
 }
 
 type Size {
