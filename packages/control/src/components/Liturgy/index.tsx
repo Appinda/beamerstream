@@ -34,5 +34,5 @@ export default function Liturgy({ onSelectItem }: LiturgyProps) {
     ));
   }
 
-  return <Window title="Liturgy">{renderSonglist()}</Window>;
+  return renderSonglist();
 }

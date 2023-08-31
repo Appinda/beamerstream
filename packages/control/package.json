@@ -14,6 +14,7 @@
     "@beamerstream/library": "workspace:./packages/library",
     "@headlessui/react": "^1.7.17",
     "electron": "^26.1.0",
+    "flexlayout-react": "^0.7.9",
     "graphql": "^16.8.0",
     "graphql-ws": "^5.14.0",
     "react": "^18.2.0",

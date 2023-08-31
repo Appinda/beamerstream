@@ -274,6 +274,7 @@ __metadata:
     eslint: ^8.45.0
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-react-refresh: ^0.4.3
+    flexlayout-react: ^0.7.9
     graphql: ^16.8.0
     graphql-ws: ^5.14.0
     postcss: ^8.4.28
@@ -2837,6 +2838,16 @@ __metadata:
   version: 3.2.7
   resolution: "flatted@npm:3.2.7"
   checksum: 427633049d55bdb80201c68f7eb1cbd533e03eac541f97d3aecab8c5526f12a20ccecaeede08b57503e772c769e7f8680b37e8d482d1e5f8d7e2194687f9ea35
+  languageName: node
+  linkType: hard
+
+"flexlayout-react@npm:^0.7.9":
+  version: 0.7.9
+  resolution: "flexlayout-react@npm:0.7.9"
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: e807272308749adc21cf933dcae488d6723d267175065900851de0fe034a69eb7f22b0bd113dc23078a6e12828aaada302ae5ccd59c7963c8cc0e38d59e15067
   languageName: node
   linkType: hard
 

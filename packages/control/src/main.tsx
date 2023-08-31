@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import router from "./router.tsx";
 import "./index.css";
+import "flexlayout-react/style/underline.css";
 import { RouterProvider } from "react-router-dom";
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
