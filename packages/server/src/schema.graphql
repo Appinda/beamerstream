@@ -1,3 +1,22 @@
+type Layer {
+  id: String!
+  text: String
+  color: String
+  src: String
+}
+
+type Slide {
+  id: String!
+  name: String!
+  layers: [Layer]!
+}
+
+type ServiceItem {
+  id: String!
+  slides: [Slide]!
+  name: String!
+}
+
 type Verse {
   tag: String!
   text: String!
@@ -5,6 +24,8 @@ type Verse {
 
 type Song {
   id: String!
+  created: Float!
+  modified: Float!
   titles: [String]!
   authors: [String]!
   copyright: String
@@ -45,12 +66,24 @@ type Display {
   workAreaSize: Size!
 }
 
+type Theme {
+  id: String!
+  created: Float!
+  modified: Float!
+  name: String!
+  slides: [Slide]!
+}
+
 type Query {
   "List of songs"
   songs: [Song]!
   song(id: String!): Song
   currentSong: Song
   currentVerse: String
+
+  themes: [Theme]!
+  currentTheme: Theme
+
   "Can be 'desktop' or 'cloud'"
   applicationMode: String
   displays: [Display]

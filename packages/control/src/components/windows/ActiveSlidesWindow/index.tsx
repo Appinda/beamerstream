@@ -1,43 +1,22 @@
-import { HTMLProps, useState } from "react";
-import Footer from "./footer";
-import Header from "./header";
-import { classNames } from "../../utils";
-import { useDefaultStore } from "../../stores/store";
-
-const slides = [
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-];
+import { HTMLProps } from "react";
+import Footer from "./Footer";
+import Header from "./Header";
+import { classNames } from "../../../utils";
+import { useDefaultStore } from "../../../stores/DefaultStore";
+import { Slide } from "@beamerstream/library";
+import { SlidePreview } from "../../SlidePreview";
 
 type SlideProps = HTMLProps<HTMLDivElement> & {
   active: boolean;
   size: number;
+  slide: Slide;
 };
 
-export function Slide({ active, size, ...props }: SlideProps) {
+export function Slide({ active, size, slide, ...props }: SlideProps) {
   return (
     <div
       {...props}
-      className="p-1 aspect-video"
+      className="p-1 h-max"
       style={{ width: `calc(100% / ${size})` }}
     >
       <div
@@ -46,19 +25,24 @@ export function Slide({ active, size, ...props }: SlideProps) {
           active ? "active" : ""
         )}
       >
-        Slide
+        <SlidePreview slide={slide} />
       </div>
     </div>
   );
 }
 
-export default function ActiveSlides() {
-  const [selectedSlide, setSelectedSlide] = useState(0);
-  const [slideZoom] = useDefaultStore((state: any) => [state.slideZoom]);
+type Props = {
+  slides?: Slide[];
+  activeSlide?: string | null;
+  onSelectSlide?: (id: string) => any;
+};
 
-  function selectSlide(index: number) {
-    setSelectedSlide(index);
-  }
+export function ActiveSlidesWindow({
+  slides = [],
+  onSelectSlide,
+  activeSlide = null,
+}: Props) {
+  const [slideZoom] = useDefaultStore((state: any) => [state.slideZoom]);
 
   return (
     <div className="w-full h-full flex flex-col overflow-hidden">
@@ -68,8 +52,9 @@ export default function ActiveSlides() {
           {slides.map((slide, i) => (
             <Slide
               key={i}
-              onClick={() => selectSlide(i)}
-              active={selectedSlide == i}
+              slide={slide}
+              onClick={() => onSelectSlide?.("slide")}
+              active={activeSlide == slide.id}
               size={slideZoom}
             />
           ))}

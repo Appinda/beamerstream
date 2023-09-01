@@ -1,7 +1,12 @@
 import { ReactNode } from "react";
 import { LinkProps, NavLink } from "react-router-dom";
 import { classNames } from "../../utils";
-import { Display, GearFill, MusicNoteBeamed } from "react-bootstrap-icons";
+import {
+  Display,
+  GearFill,
+  Image,
+  MusicNoteBeamed,
+} from "react-bootstrap-icons";
 
 type NavButtonProps = LinkProps & {
   children?: ReactNode;
@@ -25,14 +30,17 @@ function NavButton({ className, children, ...props }: NavButtonProps) {
   );
 }
 
-export default function Navbar() {
+export function Navbar() {
   return (
-    <nav className="w-full h-[3rem] min-h-[3rem] flex text-gray-400 bg-gray-800 px-4 select-none">
+    <nav className="w-full h-[3rem] min-h-[3rem] flex text-gray-400 bg-gray-950 px-4 select-none">
       <NavButton to="/app/control" title="Control">
         <Display size={25} />
       </NavButton>
       <NavButton to="/app/songs" title="Song editor">
         <MusicNoteBeamed size={25} />
+      </NavButton>
+      <NavButton to="/app/themes" title="Theme editor">
+        <Image size={25} />
       </NavButton>
       <NavButton to="/app/settings" title="Settings">
         <GearFill size={23} />

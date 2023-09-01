@@ -1,8 +1,20 @@
 import { ReactNode } from "react";
 import { Tab } from "@headlessui/react";
 import { IS_DESKTOP, classNames } from "../../utils";
-import { Cloud, Database, Display, Keyboard } from "react-bootstrap-icons";
-import { DataTab, DisplayTab, OnlineTab, ShortcutsTab } from "./settings";
+import {
+  Cloud,
+  Database,
+  Display,
+  Keyboard,
+  Window,
+} from "react-bootstrap-icons";
+import {
+  DataTab,
+  DisplayTab,
+  GeneralTab,
+  OnlineTab,
+  ShortcutsTab,
+} from "./settings";
 
 type SettingsTabProps = {
   children: ReactNode;
@@ -30,13 +42,16 @@ function SettingsTab({ children, disabled }: SettingsTabProps) {
   );
 }
 
-export default function SettingsPage() {
+export function SettingsPage() {
   return (
     <div className="SettingsPage w-full h-full flex justify-stretch">
       {/* <div className="Tabs w-1/4 p-4">H</div>
       <div className="bg-gray-950 grow"></div> */}
       <Tab.Group>
         <Tab.List className="w-[400px] flex flex-col py-4 px-3 overflow-y-auto max-h-full">
+          <SettingsTab>
+            <Window size={24} /> General
+          </SettingsTab>
           <SettingsTab disabled={!IS_DESKTOP}>
             <Display size={24} /> Display
           </SettingsTab>
@@ -51,6 +66,9 @@ export default function SettingsPage() {
           </SettingsTab>
         </Tab.List>
         <Tab.Panels className="bg-gray-950 grow p-4">
+          <Tab.Panel>
+            <GeneralTab />
+          </Tab.Panel>
           <Tab.Panel>{IS_DESKTOP && <DisplayTab />}</Tab.Panel>
           <Tab.Panel>
             <DataTab />

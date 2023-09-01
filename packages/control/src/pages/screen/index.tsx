@@ -1,44 +1,12 @@
-import { gql, useQuery } from "@apollo/client";
-import { useEffect, useRef } from "react";
-
-const GET_SONG = gql`
-  query Song {
-    currentSong {
-      name
-    }
-    currentVerse
-    songs {
-      name
-    }
-  }
-`;
-
-const SUBSCRIBE_SONG = gql`
-  subscription Subscription {
-    currentVerseChanged
-  }
-`;
+import { ReactNode } from "react";
+import { useDefaultStore } from "../../stores/DefaultStore";
+import { Slide } from "@beamerstream/library";
+import { TextLayer, ColorLayer, ImageLayer } from "./layers";
 
 export default function Screen() {
-  const { subscribeToMore, data } = useQuery(GET_SONG);
-  useEffect(() => {
-    subscribeToMore({
-      document: SUBSCRIBE_SONG,
-      // variables: { postID: params.postID },
-      updateQuery: (prev, { subscriptionData }) => {
-        console.log("A", prev, subscriptionData);
+  const [currentSlide] = useDefaultStore((state) => [state.currentSlide]);
 
-        // if (!subscriptionData.data) return prev;
-        // const newFeedItem = subscriptionData.data.commentAdded;
-
-        return Object.assign({}, prev, {
-          currentVerse: subscriptionData.data.currentVerseChanged,
-        });
-      },
-    });
-  }, []);
-
-  const lyrics = useRef<SVGTextElement>(null);
+  // const lyrics = useRef<SVGTextElement>(null);
   const fontSize = 100;
   const textColor = "white";
   const textStrokeColor = "black";
@@ -100,21 +68,36 @@ export default function Screen() {
 
   `;
 
-  useEffect(() => {
-    if (!lyrics.current || !data) return;
+  // useEffect(() => {
+  //   if (!lyrics.current || !currentSlide) return;
 
-    const verse = data.currentVerse?.split("\n");
+  //   const verse = currentSlide?.split("\n");
 
-    lyrics.current.innerHTML = `
-        <tspan x="50%" dy="-1.2em">${verse[1] ?? ""}</tspan>
-        <tspan x="50%" dy="-1.2em">${verse[0] ?? ""}</tspan>
-        <tspan x="50%" dy="2.4em">${verse[2] ?? ""}</tspan>
-        <tspan x="50%" dy="1.2em">${verse[3] ?? ""}</tspan>
-    `;
-  }, [lyrics, data]);
+  //   lyrics.current.innerHTML = `
+  //       <tspan x="50%" dy="-1.2em">${verse[1] ?? ""}</tspan>
+  //       <tspan x="50%" dy="-1.2em">${verse[0] ?? ""}</tspan>
+  //       <tspan x="50%" dy="2.4em">${verse[2] ?? ""}</tspan>
+  //       <tspan x="50%" dy="1.2em">${verse[3] ?? ""}</tspan>
+  //   `;
+  // }, [lyrics, currentSlide]);
 
   function onDoubleClick() {
     document.body.requestFullscreen();
+  }
+
+  function renderLayers(slide: Slide): ReactNode {
+    return slide.layers.map((layer) => {
+      switch (layer.type) {
+        case "text":
+          return <TextLayer layer={layer} />;
+        case "color":
+          return <ColorLayer layer={layer} />;
+        case "image":
+          return <ImageLayer layer={layer} />;
+        default:
+          return <div></div>;
+      }
+    });
   }
 
   return (
@@ -125,7 +108,8 @@ export default function Screen() {
         viewBox={`0 0 ${screenSize[0]} ${screenSize[1]}`}
         overflow="hidden"
       >
-        <defs>
+        {currentSlide && renderLayers(currentSlide)}
+        {/* <defs>
           <rect
             id="rect"
             width="100%"
@@ -152,7 +136,7 @@ export default function Screen() {
           className="Lyrics"
           clipPath="url(#clip)"
           ref={lyrics}
-        ></text>
+        ></text>*/}
       </svg>
       <style dangerouslySetInnerHTML={{ __html: style }}></style>
     </div>

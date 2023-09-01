@@ -1,13 +1,16 @@
 import { useState, useRef } from "react";
 import * as FlexLayout from "flexlayout-react";
+import { useDefaultStore } from "../../stores/DefaultStore";
+import { SlideEditorWindow, ThemeListWindow } from "../../components/windows";
+import { useThemeEditorStore } from "../../stores/ThemeEditorStore";
 
-export function SongsPage() {
+export function ThemesPage() {
   const json: FlexLayout.IJsonModel = {
     global: {
       tabEnableRename: false,
       splitterSize: 0,
       tabSetMinHeight: 150,
-      tabSetMinWidth: 300,
+      tabSetMinWidth: 250,
       splitterExtra: 10,
       tabEnableClose: false,
       tabSetEnableMaximize: false,
@@ -19,23 +22,23 @@ export function SongsPage() {
       children: [
         {
           type: "tabset",
-          weight: 25,
+          weight: 15,
           children: [
             {
               type: "tab",
-              name: "Songlist",
-              component: "button",
+              name: "Themes",
+              component: "ThemeList",
             },
           ],
         },
         {
           type: "tabset",
-          weight: 75,
+          weight: 85,
           children: [
             {
               type: "tab",
               name: "Edit",
-              component: "button",
+              component: "SlideEditor",
             },
           ],
         },
@@ -43,19 +46,35 @@ export function SongsPage() {
     },
   };
 
+  const [themes] = useDefaultStore((state) => [state.themes]);
+  const [activeSlide, setActiveSlide] = useThemeEditorStore((state) => [
+    state.activeSlide,
+    state.setActiveSlide,
+  ]);
+
   const [model] = useState<FlexLayout.Model>(FlexLayout.Model.fromJson(json));
 
   const layout = useRef<FlexLayout.Layout>(null);
   function factory(node: FlexLayout.TabNode) {
     const component = node.getComponent();
     switch (component) {
+      case "ThemeList":
+        return (
+          <ThemeListWindow
+            themes={themes ?? []}
+            activeSlide={activeSlide}
+            onSlideSelect={setActiveSlide}
+          />
+        );
+      case "SlideEditor":
+        return <SlideEditorWindow slide={activeSlide} />;
       default:
         return <p>Unassigned</p>;
     }
   }
 
   return (
-    <div className="SongsPage h-full">
+    <div className="ThemesPage h-full">
       <FlexLayout.Layout
         model={model}
         factory={factory}

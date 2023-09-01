@@ -1,9 +1,7 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
-import ControlPage from "./pages/app/ControlPage";
-import SongsPage from "./pages/app/SongsPage";
 import Screen from "./pages/screen";
 import { AppLayout, ScreenLayout } from "./layouts";
-import SettingsPage from "./pages/app/SettingsPage";
+import { ControlPage, SettingsPage, SongsPage, ThemesPage } from "./pages/app";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +26,10 @@ const router = createBrowserRouter([
           {
             path: "songs",
             element: <SongsPage />,
+          },
+          {
+            path: "themes",
+            element: <ThemesPage />,
           },
           {
             path: "settings",

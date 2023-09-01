@@ -13,6 +13,7 @@
     "@apollo/client": "^3.8.1",
     "@beamerstream/library": "workspace:./packages/library",
     "@headlessui/react": "^1.7.17",
+    "@headlessui/tailwindcss": "^0.2.0",
     "electron": "^26.1.0",
     "flexlayout-react": "^0.7.9",
     "graphql": "^16.8.0",

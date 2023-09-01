@@ -1,4 +1,4 @@
-import { useDefaultStore } from "../../stores/store";
+import { useDefaultStore } from "../../stores/DefaultStore";
 
 export default function Footer() {
   const [slideZoom, setSlideZoom] = useDefaultStore((state: any) => [

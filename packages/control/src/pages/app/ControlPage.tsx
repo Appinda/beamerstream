@@ -1,28 +1,21 @@
 import { useState, useRef } from "react";
-import { DUMMY_SONG } from "../../utils";
-import { gql, useMutation } from "@apollo/client";
 import * as FlexLayout from "flexlayout-react";
-import Liturgy from "../../components/Liturgy";
-import ActiveSlides from "../../components/ActiveSlides";
+import { ScreenPreview } from "../../components";
+import { useDefaultStore } from "../../stores/DefaultStore";
+import { ActiveSlidesWindow, ServiceWindow } from "../../components/windows";
 
-const SET_CURRENT_VERSE = gql`
-  # Increments a back-end counter and gets its resulting value
-  mutation SetCurrentVerse($text: String!) {
-    setCurrentVerse(text: $text)
-  }
-`;
+export function ControlPage() {
+  // function selectSlide(index: number) {
+  //   mutateFunction({
+  //     variables: {
+  //       text: DUMMY_SONG[index],
+  //     },
+  //   });
+  // }
 
-export default function ControlPage() {
-  // const { qerror, data: currentVerse } = useQuery(GET_LOCATIONS);
-  const [mutateFunction] = useMutation(SET_CURRENT_VERSE);
-
-  function selectVerse(index: number) {
-    mutateFunction({
-      variables: {
-        text: DUMMY_SONG[index],
-      },
-    });
-  }
+  const [currentServiceItem] = useDefaultStore((state) => [
+    state.currentServiceItem,
+  ]);
 
   function onLituryItemSelect(id: string) {
     alert(id);
@@ -35,6 +28,7 @@ export default function ControlPage() {
       tabSetMinHeight: 150,
       tabSetMinWidth: 300,
       splitterExtra: 10,
+      tabSetEnableMaximize: false,
     },
     borders: [],
     layout: {
@@ -51,8 +45,8 @@ export default function ControlPage() {
               children: [
                 {
                   type: "tab",
-                  name: "Liturgy",
-                  component: "Liturgy",
+                  name: "Service",
+                  component: "Service",
                 },
               ],
             },
@@ -62,7 +56,7 @@ export default function ControlPage() {
               children: [
                 {
                   type: "tab",
-                  name: "Screen",
+                  name: "List",
                   component: "button",
                 },
               ],
@@ -86,8 +80,8 @@ export default function ControlPage() {
           children: [
             {
               type: "tab",
-              name: "List",
-              component: "button",
+              name: "Screen",
+              component: "Screen",
             },
           ],
         },
@@ -101,10 +95,12 @@ export default function ControlPage() {
   function factory(node: FlexLayout.TabNode) {
     const component = node.getComponent();
     switch (component) {
-      case "Liturgy":
-        return <Liturgy onSelectItem={onLituryItemSelect} />;
+      case "Service":
+        return <ServiceWindow onSelectItem={onLituryItemSelect} />;
       case "ActiveSlides":
-        return <ActiveSlides />;
+        return <ActiveSlidesWindow slides={currentServiceItem?.slides} />;
+      case "Screen":
+        return <ScreenPreview screen="live" />;
       default:
         return <p>Unassigned</p>;
     }
@@ -112,50 +108,12 @@ export default function ControlPage() {
 
   return (
     <div className="ControlPage h-full">
-      <style>
-        {`
-        .flexlayout__layout { 
-          --font-size: 12px;
-          /*--color-base: black;
-          --color-text: white;
-          --color-background: transparent;
-          --color-1: rgba(0,0,0,0.3);*/
-          position: relative;
-          height: 100%;
-        }
-
-        .flexlayout__tab, .flexlayout__tabset {
-          border: 1px solid black;
-        }
-        
-        `}
-      </style>
       <FlexLayout.Layout
         model={model}
         factory={factory}
         ref={layout}
-        onModelChange={(model) => console.log(model.toJson())}
         realtimeResize
       />
     </div>
-    //
-    //   <Window title="Song">
-    //     <ul className="h-full overflow-y-scroll w-full">
-    //       {song.map((verse, i) => (
-    //         <li
-    //           key={i}
-    //           className={classNames(
-    //             "whitespace-break-spaces hover:bg-gray-700 cursor-pointer select-none p-2 [&.active]:bg-gray-600",
-    //             activeVerseIndex == i ? "active" : ""
-    //           )}
-    //           onClick={() => selectVerse(i)}
-    //         >
-    //           {verse}
-    //         </li>
-    //       ))}
-    //     </ul>
-    //   </Window>
-    //   <Liturgy  />
-    // </div>
   );
 }
