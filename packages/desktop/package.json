@@ -1,17 +1,38 @@
 {
   "name": "@beamerstream/desktop",
+  "description": "Lyrcis projection software",
   "version": "1.0.0",
   "main": "main.js",
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=develop electron .",
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "dependencies": {
     "@beamerstream/server": "workspace:^"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "electron": "^26.2.4"
+    "electron": "26.2.4",
+    "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "appId": "nl.appinda.beamerstream",
+    "productName": "Beamerstream",
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
   }
 }
