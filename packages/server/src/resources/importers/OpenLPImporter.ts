@@ -16,6 +16,11 @@ export class OpenLPImporter implements ResourceImporter {
       copyright: xmlContent?.song?.[0]?.properties?.[0]?.copyright?.[0]?._text[0],
       titles: xmlContent?.song?.[0]?.properties?.[0]?.titles?.[0]?.title?.map((title: any) => title?._text[0]) ?? [],
       verseOrder: xmlContent?.song?.[0]?.properties?.[0]?.verseOrder?.[0]?._text[0],
+      created: Date.now(),
+      modified: Date.now(),
+      name: "File",
+      slides: [],
+      comments: "",
       lyrics: xmlContent?.song?.[0]?.lyrics?.[0]?.verse?.map((v: any) => ({
         tag: v._attributes.name,
         text: v.lines[0]._text.join("<br/>")
