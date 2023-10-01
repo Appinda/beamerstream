@@ -31,4 +31,4 @@ jobs:
     - name: Build frontend
       run: yarn workspace @beamerstream/control build
     - name: Build executable
-      run: yarn workspace @beamerstream/desktop build
+      run: yarn workspace @beamerstream/desktop dist
