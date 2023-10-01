@@ -28,4 +28,7 @@ jobs:
     - name: Set yarn version
       run: yarn set version stable
     - run: yarn install --frozen-lockfile
-    - run: yarn workspace @beamerstream/control build
+    - name: Build frontend
+      run: yarn workspace @beamerstream/control build
+    - name: Build executable
+      run: yarn workspace @beamerstream/desktop build
