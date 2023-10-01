@@ -7,9 +7,9 @@
     "start": "electron ."
   },
   "dependencies": {
-    "@beamerstream/server": "workspace:./packages/server"
+    "@beamerstream/server": "workspace:^"
   },
   "devDependencies": {
-    "electron": "^26.1.0"
+    "electron": "^26.2.4"
   }
 }
