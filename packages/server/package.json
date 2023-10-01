@@ -6,7 +6,8 @@
   "scripts": {
     "watch": "tsx watch ./src/index.ts",
     "dev": "tsx ./src/index.ts",
-    "build": "rollup -c && copyfiles --flat ./src/schema.graphql ./dist/"
+    "build": "rollup -c && copyfiles --flat ./src/schema.graphql ./dist/",
+    "start": "node ./dist/"
   },
   "dependencies": {
     "@apollo/server": "^4.9.3",

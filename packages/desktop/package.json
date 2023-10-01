@@ -4,12 +4,14 @@
   "main": "main.js",
   "license": "MIT",
   "scripts": {
+    "dev": "cross-env NODE_ENV=develop electron .",
     "start": "electron ."
   },
   "dependencies": {
     "@beamerstream/server": "workspace:^"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "electron": "^26.2.4"
   }
 }

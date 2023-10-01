@@ -1,7 +1,14 @@
 const { app, BrowserWindow, screen, ipcMain } = require("electron");
 const path = require("path");
 
+const DEVELOP = process.env.NODE_ENV == "develop";
+
 let mainWindow;
+
+function getHost() {
+  const port = DEVELOP ? 5173 : 3000;
+  return "http://localhost:" + port;
+}
 
 function createWindow() {
   let window = new BrowserWindow({
@@ -20,7 +27,7 @@ function createWindow() {
     event.reply("getDisplays", screens);
   });
 
-  window.loadURL("http://localhost:5173/");
+  window.loadURL(getHost());
 
   window.maximize();
 
@@ -54,7 +61,7 @@ function openScreen(name) {
 
   window.setMenu(null);
 
-  window.loadURL("http://localhost:5173/output/" + name);
+  window.loadURL(getHost() + "/output/" + name);
 
   window.on("ready-to-show", () => {
     window.show();
