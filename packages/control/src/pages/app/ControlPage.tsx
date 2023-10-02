@@ -2,7 +2,11 @@ import { useState, useRef } from "react";
 import * as FlexLayout from "flexlayout-react";
 import { ScreenPreview } from "../../components";
 import { useDefaultStore } from "../../stores/DefaultStore";
-import { ActiveSlidesWindow, ServiceWindow } from "../../components/windows";
+import {
+  ActiveSlidesWindow,
+  SearchWindow,
+  ServiceWindow,
+} from "../../components/windows";
 
 export function ControlPage() {
   // function selectSlide(index: number) {
@@ -57,7 +61,7 @@ export function ControlPage() {
                 {
                   type: "tab",
                   name: "List",
-                  component: "button",
+                  component: "Search",
                 },
               ],
             },
@@ -99,6 +103,8 @@ export function ControlPage() {
         return <ServiceWindow onSelectItem={onLituryItemSelect} />;
       case "ActiveSlides":
         return <ActiveSlidesWindow slides={currentServiceItem?.slides} />;
+      case "Search":
+        return <SearchWindow />;
       case "Screen":
         return <ScreenPreview screen="live" />;
       default:

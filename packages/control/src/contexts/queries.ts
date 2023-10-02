@@ -4,8 +4,18 @@ export const GET_SONGLIST = gql`
   query Songs {
     songs {
       id
+      created
+      modified
       titles
       authors
+      copyright
+      ccli
+      comments
+      verseOrder
+      lyrics {
+        tag
+        text
+      }
     }
   }
 `;

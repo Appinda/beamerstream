@@ -4,12 +4,15 @@ import { PropsWithChildren, useEffect } from "react";
 import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
-import { GET_THEMES } from "./queries";
+import { GET_SONGLIST, GET_THEMES } from "./queries";
 import { useDefaultStore } from "../stores/DefaultStore";
 import { useThemeEditorStore } from "../stores/ThemeEditorStore";
 
 export default function ServerContext({ children }: PropsWithChildren) {
-  const [setThemes] = useDefaultStore((state) => [state.setThemes]);
+  const [setThemes, setSonglist] = useDefaultStore((state) => [
+    state.setThemes,
+    state.setSonglist,
+  ]);
   const [setActiveSlide] = useThemeEditorStore((state) => [
     state.setActiveSlide,
   ]);
@@ -61,6 +64,18 @@ export default function ServerContext({ children }: PropsWithChildren) {
         if (result.data.themes[0])
           setActiveSlide(result.data.themes[0].slides[0]);
       });
+
+    client
+      .query({
+        query: GET_SONGLIST,
+      })
+      .then((result) => {
+        console.log("A", result);
+
+        setSonglist(result.data.songs);
+      });
+
+    // const { loading, data: songlist } = useQuery(GET_SONGLIST);
   }, []);
 
   return children;

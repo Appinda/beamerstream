@@ -9,13 +9,17 @@ export class OpenLPImporter implements ResourceImporter {
     const fileContent = await fs.promises.readFile(filepath, { encoding: "utf-8" });
     const xmlContent = JSON.parse(convert.xml2json(fileContent, { compact: true, alwaysArray: true }));
 
+    // Create basic verse order when not set in import file
+    let verseOrder = xmlContent?.song?.[0]?.properties?.[0]?.verseOrder?.[0]?._text[0];
+    verseOrder ??= xmlContent?.song?.[0]?.lyrics?.[0]?.verse.map((v: any) => v._attributes.name).join(" ");
+
     return {
       id: uuidv4().substring(0, 8),
       authors: xmlContent?.song[0]?.properties[0]?.authors[0]?.author?.map((author: any) => author?._text[0]) ?? [],
       ccli: xmlContent?.song?.[0]?.properties?.[0]?.ccliNo?.[0]?._text[0],
       copyright: xmlContent?.song?.[0]?.properties?.[0]?.copyright?.[0]?._text[0],
       titles: xmlContent?.song?.[0]?.properties?.[0]?.titles?.[0]?.title?.map((title: any) => title?._text[0]) ?? [],
-      verseOrder: xmlContent?.song?.[0]?.properties?.[0]?.verseOrder?.[0]?._text[0],
+      verseOrder: verseOrder,
       created: Date.now(),
       modified: Date.now(),
       name: "File",

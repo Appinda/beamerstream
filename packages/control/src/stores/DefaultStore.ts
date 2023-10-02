@@ -1,10 +1,14 @@
-import { Service, ServiceItem, Slide, Theme } from "@beamerstream/library";
+import {
+  Service,
+  ServiceItem,
+  Slide,
+  Song,
+  Theme,
+} from "@beamerstream/library";
 import { create } from "zustand";
 
 // const { qerror, data: currentVerse } = useQuery(GET_LOCATIONS);
 // const [mutateFunction] = useMutation(SET_CURRENT_VERSE);
-
-// const { loading, data: songlist } = useQuery(GET_SONGLIST);
 
 // const { subscribeToMore, data } = useQuery(GET_SONG);
 //   useEffect(() => {
@@ -25,6 +29,9 @@ import { create } from "zustand";
 //   }, []);
 
 export type State = {
+  songlist: Song[];
+  setSonglist: (value: Song[]) => void;
+
   service: Service;
   currentTheme: Theme | null;
   setThemes: (value: Theme[]) => void;
@@ -42,6 +49,9 @@ const dummyService: Service = {
 };
 
 export const useDefaultStore = create<State>((set) => ({
+  songlist: [],
+  setSonglist: (value: Song[]) => set(() => ({ songlist: value })),
+
   service: dummyService,
   currentSlide: null,
   currentTheme: null,
