@@ -34,7 +34,7 @@ export function ContextMenuOutlet({
           {menu.map((item) => (
             <li
               className="px-2 hover:bg-[rgba(0,0,0,0.1)] cursor-pointer"
-              onClick={() => item.onClick()}
+              onClick={() => item.onClick?.()}
             >
               {item.name}
             </li>

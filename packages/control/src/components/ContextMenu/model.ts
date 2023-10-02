@@ -1,6 +1,6 @@
 export type ContextMenuOption = {
   name: string;
-  onClick: () => boolean | void;
+  onClick?: () => boolean | void;
 };
 type ContextMenuData = ContextMenuOption[];
 

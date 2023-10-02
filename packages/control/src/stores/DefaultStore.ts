@@ -29,8 +29,12 @@ import { create } from "zustand";
 //   }, []);
 
 export type State = {
+  loading: boolean;
+  setLoading: (value: boolean) => void;
+
   songlist: Song[];
   setSonglist: (value: Song[]) => void;
+  deleteSong: (id: string) => void;
 
   service: Service;
   currentTheme: Theme | null;
@@ -49,19 +53,25 @@ const dummyService: Service = {
 };
 
 export const useDefaultStore = create<State>((set) => ({
+  loading: true,
+  setLoading: (value: boolean) => set({ loading: value }),
+
   songlist: [],
-  setSonglist: (value: Song[]) => set(() => ({ songlist: value })),
+  setSonglist: (value: Song[]) => set({ songlist: value }),
+  deleteSong: (id: string) => {
+    alert(`Song ${id} deleted`);
+  },
 
   service: dummyService,
   currentSlide: null,
   currentTheme: null,
-  setThemes: (value: Theme[]) => set(() => ({ themes: value })),
+  setThemes: (value: Theme[]) => set({ themes: value }),
   themes: [],
   currentServiceItem: null,
   setCurrentServiceItem: async (id: string) => {
     console.log(id);
-    return set(() => ({ currentServiceItem: null }));
+    return set({ currentServiceItem: null });
   },
   slideZoom: 4,
-  setSlideZoom: (value: number) => set(() => ({ slideZoom: value })),
+  setSlideZoom: (value: number) => set({ slideZoom: value }),
 }));
