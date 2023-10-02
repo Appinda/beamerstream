@@ -17,14 +17,17 @@ export default function ServerContext({ children }: PropsWithChildren) {
   function createConnection() {
     const wsLink = ((window as any).wsLink = new GraphQLWsLink(
       createClient({
-        url: "ws://localhost:4000/graphql",
+        url: "ws://localhost:3000/graphql",
       })
     ));
 
     wsLink.client.on("connecting", () => console.debug("wsLink connecting"));
     wsLink.client.on("connected", () => console.debug("wsLink connected"));
     wsLink.client.on("closed", () => console.debug("wsLink closed"));
-    wsLink.client.on("error", () => console.debug("wsLink error"));
+    wsLink.client.on("error", () => {
+      console.debug("wsLink error");
+      alert("Could not connect to server");
+    });
     wsLink.client.on("opened", () => console.debug("wsLink opened"));
 
     loadErrorMessages();
