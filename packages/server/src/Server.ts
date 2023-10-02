@@ -71,7 +71,7 @@ export default class Server {
     });
   }
 
-  async run() {
+  async start() {
     await this.init();
 
     await this.apolloServer.start();
@@ -91,6 +91,13 @@ export default class Server {
     };
     this.httpServer.listen(options, () => {
       console.log(`Server is now running on http://${this.host}:${this.port}/graphql`);
+    });
+  }
+
+  async stop(): Promise<void> {
+    await this.apolloServer.stop();
+    return new Promise<void>((resolve) => {
+      this.httpServer.close(() => resolve());
     });
   }
 }

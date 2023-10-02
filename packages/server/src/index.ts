@@ -9,7 +9,7 @@ let entryFile = process.argv?.[1];
 // Only start if started directly
 if (entryFile === __filename) {
   const server = new Server();
-  server.run();
+  server.start();
 }
 
 export default Server;

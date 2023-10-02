@@ -24,7 +24,7 @@ class WindowManager {
     if (DEVELOP) {
       window.loadURL(getHost());
     } else {
-      const filePath = path.resolve("./", "resources/ui/index.html");
+      const filePath = path.resolve(app.getAppPath(), "../ui/index.html");
       window.loadFile(filePath);
     }
 
@@ -60,9 +60,8 @@ class WindowManager {
     if (DEVELOP) {
       window.loadURL(getHost() + "/output/" + name);
     } else {
-      const filePath = path.resolve("./", "resources/ui/index.html");
+      const filePath = path.resolve(app.getAppPath(), "../ui/index.html");
       await window.loadFile(filePath, { hash: "/output/live" });
-      // await window.loadURL("file:///D:/CodeProjects/Git/Appinda/beamerstream/packages/control/dist/index.html#/output/live")
     }
 
     window.on("ready-to-show", () => {
