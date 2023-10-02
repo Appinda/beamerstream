@@ -3,7 +3,7 @@ type Props = {
 };
 
 export function ScreenPreview({ screen }: Props) {
-  const url = `http://localhost:5173/output/${screen}`;
+  const url = `http://localhost:5173/#/output/${screen}`;
 
   return (
     <div className="ScreenPreview w-full aspect-video">

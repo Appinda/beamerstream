@@ -18,18 +18,25 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default class Server {
-  private _port: number | null = null;
+  private _host: string;
+  private _port: number;
   private app!: Express;
   private httpServer!: HttpServer;
   private apolloServer!: ApolloServer;
   private resources!: ResourceLoader;
   private schema!: GraphQLSchema;
 
+  public get host() {
+    return this._host;
+  }
   public get port() {
     return this._port;
   }
 
-  constructor() {}
+  constructor(host: string = "localhost", port: number = 3000) {
+    this._port = port;
+    this._host = host;
+  }
 
   async init() {
     this.resources = new ResourceLoader();
@@ -77,10 +84,13 @@ export default class Server {
     this.app.use("/graphql", cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(this.apolloServer));
     this.app.use("/", express.static(path.join(__dirname, "../../control/dist")));
 
-    this._port = 4000;
-
-    this.httpServer.listen(this._port, () => {
-      console.log(`Server is now running on http://localhost:${this._port}/graphql`);
+    const options = {
+      host: this.host,
+      port: this.port,
+      exclusive: true
+    };
+    this.httpServer.listen(options, () => {
+      console.log(`Server is now running on http://${this.host}:${this.port}/graphql`);
     });
   }
 }

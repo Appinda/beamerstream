@@ -1,9 +1,9 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
+import { Navigate, createHashRouter } from "react-router-dom";
 import Screen from "./pages/screen";
 import { AppLayout, ScreenLayout } from "./layouts";
 import { ControlPage, SettingsPage, SongsPage, ThemesPage } from "./pages/app";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     children: [

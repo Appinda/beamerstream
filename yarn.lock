@@ -305,6 +305,7 @@ __metadata:
     cross-env: ^7.0.3
     electron: 26.2.4
     electron-builder: ^24.6.4
+    yargs: ^17.7.2
   languageName: unknown
   linkType: soft
 
@@ -6603,7 +6604,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^17.6.2":
+"yargs@npm:^17.6.2, yargs@npm:^17.7.2":
   version: 17.7.2
   resolution: "yargs@npm:17.7.2"
   dependencies:
