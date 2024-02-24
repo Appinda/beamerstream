@@ -1,4 +1,4 @@
-import { Slide, Theme } from "@beamerstream/library";
+import { Slide, Theme } from "@beamerstream/common";
 import { SlidePreview } from "../..";
 import { Disclosure } from "@headlessui/react";
 import { ChevronRight } from "react-bootstrap-icons";

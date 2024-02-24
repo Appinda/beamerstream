@@ -1,15 +1,20 @@
+const path = require("path");
 const { app, BrowserWindow } = require("electron");
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 const { DEVELOP } = require("./utils");
-const Server = require("./server");
-
 const WindowManager = require("./WindowManager");
+const {
+  spawn,
+  fork,
+  ChildProcessWithoutNullStreams,
+} = require("child_process");
 
 if (DEVELOP) {
   console.log("DEVELOP is enabled.");
 }
 
+/** @type {ChildProcessWithoutNullStreams} */
 let server;
 
 const args = yargs(hideBin(process.argv))
@@ -45,15 +50,40 @@ const args = yargs(hideBin(process.argv))
   .strict()
   .parse();
 
-app.whenReady().then(async () => {
-  // const Server = (await import("./server/index.js")).default;
+process.title = "Beamerstream";
 
-  server = new Server(args.host, args.port);
-  server.start();
+app.whenReady().then(async () => {
+  console.log("Resource path:", process.resourcesPath);
+  try {
+    const serverPath = DEVELOP
+      ? path.resolve("../server/dist")
+      : path.join(process.resourcesPath, "server");
+    const serverEntry = path.join(serverPath, "indexs.cjs");
+    console.log(serverPath, serverEntry);
+    server = fork(
+      "D:\\CodeProjects\\Git\\Appinda\\beamerstream\\server\\dist\\index.cjs",
+      {
+        stdio: "pipe",
+        cwd: serverPath,
+        detached: false,
+      }
+    );
+    server.stdout.on("data", (data) => {
+      console.log(`[SERVER] ${data}`);
+    });
+
+    server.stderr.on("data", (data) => {
+      console.error(`[SERVER]: ${data}`);
+    });
+
+    console.log("Server started");
+  } catch (e) {
+    console.error(e);
+  }
 
   if (!args.headless) {
     const manager = new WindowManager();
-    manager.createWindow();
+    manager.initWithSplashscreen();
     app.on("activate", () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
@@ -64,7 +94,18 @@ app.whenReady().then(async () => {
 
 app.on("will-quit", async (e) => {
   console.log("Shutting down server..");
-  await server.stop();
+  // await server.stop();
+  await new Promise((resolve) => {
+    const result = server.kill("SIGINT");
+    console.log(result);
+
+    server.once("exit", () => {
+      console.log("Exited");
+      resolve();
+    });
+  });
+
+  console.log("Done");
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common

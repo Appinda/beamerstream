@@ -6,7 +6,6 @@ import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
 import express, { Express } from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import { expressMiddleware } from "@apollo/server/express4";
 import ResourceLoader from "./resources/ResourceLoader.js";
 import { GraphQLSchema } from "graphql";
@@ -81,7 +80,7 @@ export default class Server {
     // });
     console.log(path.join(__dirname, "../control/dist"));
 
-    this.app.use("/graphql", cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(this.apolloServer));
+    this.app.use("/graphql", cors<cors.CorsRequest>(), express.json(), expressMiddleware(this.apolloServer));
     this.app.use("/", express.static(path.join(__dirname, "../../control/dist")));
 
     const options = {

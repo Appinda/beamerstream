@@ -1,4 +1,4 @@
-import { Service, Song } from "@beamerstream/library";
+import { Service, Song } from "@beamerstream/common";
 
 export interface ResourceImporter {
   importSong(filepath: string): Promise<Song>;

@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import os from "os";
-import { Song } from "@beamerstream/library";
+import { Song } from "@beamerstream/common";
 import { ResourceImporter, OpenLPImporter, BeamerstreamImporter } from "./importers/index.js";
 import {} from "./importers/OpenLPImporter.js";
 import { log } from "console";

@@ -1,4 +1,4 @@
-import { ImageLayer } from "@beamerstream/library";
+import { ImageLayer } from "@beamerstream/common";
 
 type Props = {
   layer: ImageLayer;

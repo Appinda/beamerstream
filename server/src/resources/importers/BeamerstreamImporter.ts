@@ -1,4 +1,4 @@
-import { Service, Song } from "@beamerstream/library";
+import { Service, Song } from "@beamerstream/common";
 import { ResourceImporter } from "./ResourceImporter.js";
 
 export class BeamerstreamImporter implements ResourceImporter {

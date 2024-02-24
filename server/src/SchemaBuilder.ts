@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { PhysicalDisplay, Theme } from "@beamerstream/library";
+import { PhysicalDisplay, Theme } from "@beamerstream/common";
 import { PubSub } from "graphql-subscriptions";
 import ResourceLoader from "./resources/ResourceLoader.js";
 import { makeExecutableSchema } from "@graphql-tools/schema";
@@ -62,7 +62,7 @@ export default class SchemaBuilder {
 
   constructor(private readonly resources: ResourceLoader) {
     const require2 = createRequire(import.meta.url);
-    this.typeDefs = fs.readFileSync(require2.resolve("./schema.graphql"), { encoding: "utf-8" });
+    this.typeDefs = fs.readFileSync(require2.resolve("./static/schema.graphql"), { encoding: "utf-8" });
   }
 
   build(): GraphQLSchema {

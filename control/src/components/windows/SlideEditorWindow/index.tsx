@@ -1,4 +1,4 @@
-import { ImageLayer, Slide } from "@beamerstream/library";
+import { ImageLayer, Slide } from "@beamerstream/common";
 import { useRef } from "react";
 
 type Props = {

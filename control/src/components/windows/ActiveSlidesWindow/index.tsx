@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import { classNames } from "../../../utils";
 import { useDefaultStore } from "../../../stores/DefaultStore";
-import { Slide } from "@beamerstream/library";
+import { Slide } from "@beamerstream/common";
 import { SlidePreview } from "../../SlidePreview";
 
 type SlideProps = HTMLProps<HTMLDivElement> & {

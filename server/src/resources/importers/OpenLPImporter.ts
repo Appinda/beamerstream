@@ -1,5 +1,5 @@
 import fs from "fs";
-import { Service, Song, Verse } from "@beamerstream/library";
+import { Service, Song, Verse } from "@beamerstream/common";
 import { ResourceImporter } from "./ResourceImporter.js";
 import convert from "xml-js";
 import { v4 as uuidv4 } from "uuid";

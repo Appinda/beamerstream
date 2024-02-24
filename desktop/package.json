@@ -12,6 +12,7 @@
     "dist": "electron-builder"
   },
   "dependencies": {
+    "app-builder-bin": "^4.2.0",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
@@ -33,10 +34,17 @@
         ]
       }
     ],
-    "extraFiles": [
+    "extraResources": [
+      {
+        "from": "../server/dist",
+        "to": "./server",
+        "filter": [
+          "**/*"
+        ]
+      },
       {
         "from": "../control/dist",
-        "to": "./resources/ui",
+        "to": "./ui",
         "filter": [
           "**/*"
         ]

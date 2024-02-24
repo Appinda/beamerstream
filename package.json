@@ -2,6 +2,9 @@
   "name": "beamerstream",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "common",
+    "control",
+    "server",
+    "desktop"
   ]
 }

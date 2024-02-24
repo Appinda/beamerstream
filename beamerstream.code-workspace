@@ -1,8 +1,8 @@
 {
   "folders": [
     {
-      "name": "Library",
-      "path": "./library"
+      "name": "Common",
+      "path": "./common"
     },
     {
       "name": "Control",

@@ -1,4 +1,4 @@
-import { TextLayer } from "@beamerstream/library";
+import { TextLayer } from "@beamerstream/common";
 
 type Props = {
   layer: TextLayer;

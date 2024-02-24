@@ -4,11 +4,34 @@ const path = require("path");
 const { DEVELOP, getHost } = require("./utils");
 
 class WindowManager {
+  initWithSplashscreen() {
+    const win = new BrowserWindow({
+      width: 400,
+      height: 150,
+      movable: false,
+      alwaysOnTop: true,
+      center: true,
+      closable: false,
+      frame: false,
+      transparent: true,
+      resizable: false,
+      // focusable: false,
+    });
+
+    win.loadFile("splash.html");
+    this.splashScreen = win;
+
+    setTimeout(() => {
+      this.createWindow();
+    }, 1000);
+  }
+
   createWindow() {
     let window = new BrowserWindow({
       width: 1280,
       height: 720,
       show: false,
+      title: "Control",
       webPreferences: {
         preload: path.join(__dirname, "preload.js"),
         nodeIntegration: true,
@@ -31,6 +54,7 @@ class WindowManager {
     window.maximize();
 
     window.on("ready-to-show", () => {
+      this.splashScreen.destroy();
       window.show();
       this.openScreen("live");
     });
@@ -48,6 +72,7 @@ class WindowManager {
       x: targetScreen.bounds.x,
       y: targetScreen.bounds.y,
       show: false,
+      title: "Screen " + name,
       alwaysOnTop: false,
       fullscreen: true,
       webPreferences: {

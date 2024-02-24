@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { useDefaultStore } from "../../stores/DefaultStore";
-import { Slide } from "@beamerstream/library";
+import { Slide } from "@beamerstream/common";
 import { TextLayer, ColorLayer, ImageLayer } from "./layers";
 
 export default function Screen() {

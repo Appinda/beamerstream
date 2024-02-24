@@ -1,4 +1,4 @@
-import { Slide } from "@beamerstream/library";
+import { Slide } from "@beamerstream/common";
 import { create } from "zustand";
 
 export type State = {

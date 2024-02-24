@@ -1,4 +1,4 @@
-import { ColorLayer } from "@beamerstream/library";
+import { ColorLayer } from "@beamerstream/common";
 
 type Props = {
   layer: ColorLayer;

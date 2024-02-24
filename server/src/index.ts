@@ -1,15 +1,15 @@
 import Server from "./Server.js";
-import { createRequire } from "module";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
+process.title = "Server";
 
-let entryFile = process.argv?.[1];
+const server = new Server();
+server.start();
 
-// Only start if started directly
-if (entryFile === __filename) {
-  const server = new Server();
-  server.start();
-}
+process.on("SIGINT", () => {
+  console.log("Hey Boss I just Received SIGINT.");
+});
+process.on("SIGTERM", () => {
+  console.log("Hey Boss I just Received SIGTERM.");
+});
 
 export default Server;

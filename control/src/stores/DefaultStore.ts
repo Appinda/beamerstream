@@ -1,10 +1,4 @@
-import {
-  Service,
-  ServiceItem,
-  Slide,
-  Song,
-  Theme,
-} from "@beamerstream/library";
+import { Service, ServiceItem, Slide, Song, Theme } from "@beamerstream/common";
 import { create } from "zustand";
 
 // const { qerror, data: currentVerse } = useQuery(GET_LOCATIONS);

@@ -1,5 +1,5 @@
 import { HTMLProps, useEffect, useState } from "react";
-import { PhysicalDisplay } from "@beamerstream/library";
+import { PhysicalDisplay } from "@beamerstream/common";
 import { classNames } from "../../../utils";
 
 type DisplayProps = HTMLProps<HTMLDivElement> & {

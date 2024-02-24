@@ -1,0 +1,20 @@
+{
+  "name": "@beamerstream/common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.cjs",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && pkgroll",
+    "watch": "pkgroll --watch"
+  },
+  "exports": {
+    "types": "./dist/index.d.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "pkgroll": "^2.0.1",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
+  }
+}
