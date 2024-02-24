@@ -12,7 +12,6 @@
     "dist": "electron-builder"
   },
   "dependencies": {
-    "@beamerstream/server": "workspace:^",
     "yargs": "^17.7.2"
   },
   "devDependencies": {

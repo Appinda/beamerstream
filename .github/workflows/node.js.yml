@@ -5,30 +5,25 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
-
     runs-on: self-hosted
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v3.8.1
-      with:
-        # Version Spec of the version to use. Examples: 12.x, 10.15.1, >=10.15.0.
-        node-version: 18.x
-        # Used to specify a package manager for caching in the default directory. Supported values: npm, yarn, pnpm.
-        #cache: 'yarn'
-    - name: Enable corepack
-      run: corepack enable
-    - name: Set yarn version
-      run: yarn set version stable
-    - run: yarn install --frozen-lockfile
-    - name: Build frontend
-      run: yarn workspace @beamerstream/control build
-    - name: Build executable
-      run: yarn workspace @beamerstream/desktop dist
+      - uses: actions/checkout@v3
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.8.1
+        with:
+          # Version Spec of the version to use. Examples: 12.x, 10.15.1, >=10.15.0.
+          node-version: 18.x
+          # Used to specify a package manager for caching in the default directory. Supported values: npm, yarn, pnpm.
+          cache: "npm"
+      - run: npm ci
+      - name: Build frontend
+        run: npm run build -w @beamerstream/control
+      - name: Build executable
+        run: npm run dist -w @beamerstream/desktop
