@@ -2,19 +2,19 @@
   "folders": [
     {
       "name": "Library",
-      "path": "./packages/library"
+      "path": "./library"
     },
     {
       "name": "Control",
-      "path": "./packages/control"
+      "path": "./control"
     },
     {
       "name": "Server",
-      "path": "./packages/server"
+      "path": "./server"
     },
     {
       "name": "Desktop",
-      "path": "./packages/desktop"
+      "path": "./desktop"
     },
     {
       "name": " ",
