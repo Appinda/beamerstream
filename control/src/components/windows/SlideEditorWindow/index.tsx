@@ -2,10 +2,10 @@ import { ImageLayer, Slide } from "@beamerstream/common";
 import { useRef } from "react";
 
 type Props = {
-  slide?: Slide | null;
+  slide?: Slide;
 };
 
-export function SlideEditorWindow({ slide = null }: Props) {
+export function SlideEditorWindow({ slide = undefined }: Props) {
   const canvas = useRef<SVGSVGElement>(null);
 
   return (

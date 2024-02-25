@@ -1,15 +1,8 @@
-import { useEffect, useState } from "react";
-import { useDefaultStore } from "../../stores/DefaultStore";
+type Props = {
+  percentage: number;
+};
 
-export default function LoadingOverlay() {
-  const setLoading = useDefaultStore((state) => state.setLoading);
-
-  const [value, setValue] = useState(0);
-  useEffect(() => {
-    setValue(100);
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
-
+export default function LoadingOverlay({ percentage }: Props) {
   return (
     <div
       className="absolute w-screen h-screen left-0 top-0 z-[100] bg-blue-500 flex flex-col gap-16 justify-center items-center select-none"
@@ -22,7 +15,7 @@ export default function LoadingOverlay() {
       <div className="progrss bg-white w-full max-w-[700px] h-[13px] rounded-md overflow-hidden">
         <div
           className="bg-blue-700 h-full transition-all duration-1000"
-          style={{ width: value + "%" }}
+          style={{ width: percentage + "%" }}
         ></div>
       </div>
     </div>

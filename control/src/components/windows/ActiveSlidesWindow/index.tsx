@@ -2,9 +2,9 @@ import { HTMLProps } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import { classNames } from "../../../utils";
-import { useDefaultStore } from "../../../stores/DefaultStore";
 import { Slide } from "@beamerstream/common";
 import { SlidePreview } from "../../SlidePreview";
+import { useClientState } from "../../../hooks/useClientState";
 
 type SlideProps = HTMLProps<HTMLDivElement> & {
   active: boolean;
@@ -42,8 +42,7 @@ export function ActiveSlidesWindow({
   onSelectSlide,
   activeSlide = null,
 }: Props) {
-  const [slideZoom] = useDefaultStore((state: any) => [state.slideZoom]);
-
+  const clientState = useClientState();
   return (
     <div className="w-full h-full flex flex-col overflow-hidden">
       <Header />
@@ -55,7 +54,7 @@ export function ActiveSlidesWindow({
               slide={slide}
               onClick={() => onSelectSlide?.("slide")}
               active={activeSlide == slide.id}
-              size={slideZoom}
+              size={clientState.slideZoom}
             />
           ))}
         </div>

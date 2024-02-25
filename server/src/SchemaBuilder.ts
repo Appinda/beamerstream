@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { PhysicalDisplay, Theme } from "@beamerstream/common";
+import { PhysicalDisplay, Slide, Song, Theme } from "@beamerstream/common";
 import { PubSub } from "graphql-subscriptions";
 import ResourceLoader from "./resources/ResourceLoader.js";
 import { makeExecutableSchema } from "@graphql-tools/schema";
@@ -8,54 +8,65 @@ import { GraphQLSchema } from "graphql";
 
 let displays: PhysicalDisplay[] | null = null;
 let applicationMode = "desktop";
-let themes: Theme[] = [
-  {
-    id: "2",
-    created: Date.now(),
-    modified: Date.now(),
-    name: "First theme",
-    slides: [
-      {
-        id: "1",
-        name: "Slide 1",
-        layers: [
-          {
-            id: "2",
-            type: "image",
-            src: "/backgrounds/background1.jpg"
-          },
-          {
-            id: "4",
-            type: "text",
-            text: "Hello"
-          }
-        ]
-      },
-      {
-        id: "2",
-        name: "Slide 2",
-        layers: [
-          {
-            id: "6",
-            type: "text",
-            text: "World"
-          }
-        ]
-      },
-      {
-        id: "3",
-        name: "Slide 3",
-        layers: [
-          {
-            id: "6",
-            type: "text",
-            text: "World"
-          }
-        ]
-      }
-    ]
-  }
-];
+
+type State = {
+  themes: Theme[];
+  currentSlide?: Slide;
+  currentTheme?: Theme;
+};
+
+const STATE: State = {
+  themes: [
+    {
+      id: "2",
+      created: Date.now(),
+      modified: Date.now(),
+      name: "First theme",
+      slides: [
+        {
+          id: "1",
+          name: "Slide 1",
+          layers: [
+            {
+              id: "2",
+              type: "image",
+              src: "/backgrounds/background1.jpg"
+            },
+            {
+              id: "4",
+              type: "text",
+              text: "Hello"
+            }
+          ]
+        },
+        {
+          id: "2",
+          name: "Slide 2",
+          layers: [
+            {
+              id: "6",
+              type: "text",
+              text: "World"
+            }
+          ]
+        },
+        {
+          id: "3",
+          name: "Slide 3",
+          layers: [
+            {
+              id: "6",
+              type: "text",
+              text: "World"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  currentSlide: undefined,
+  currentTheme: undefined
+};
 
 export default class SchemaBuilder {
   private typeDefs: string;
@@ -74,20 +85,22 @@ export default class SchemaBuilder {
         song: (_parent: any, args: { id: string }, _ctx: any, _info: any) => {
           return this.resources.getSong(args.id);
         },
-        currentSong: () => null,
-        currentVerse: () => null,
-        themes: () => themes,
-        currentTheme: () => null,
+        currentSlide: () => STATE.currentSlide,
+        themes: () => STATE.themes,
+        currentTheme: () => STATE.currentTheme,
         applicationMode: () => applicationMode,
         displays: () => displays
       },
       Mutation: {
-        setCurrentVerse: (_: any, data: { text: string }) => {
+        setCurrentVerse(_: any, data: { text: string }) {
           // currentVerse = data.text;
           // pubsub.publish("CURRENT_VERSE_CHANGED", {
           //   currentVerseChanged: currentVerse
           // });
           // return currentVerse;
+          throw new Error("Not implemented");
+        },
+        setDefaultTheme(_: any, data: { text: string }) {
           throw new Error("Not implemented");
         }
       },

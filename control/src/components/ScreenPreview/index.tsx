@@ -7,7 +7,7 @@ export function ScreenPreview({ screen }: Props) {
 
   return (
     <div className="ScreenPreview w-full aspect-video">
-      <iframe src={url} className="w-full h-full border-none"></iframe>
+      {/* <iframe src={url} className="w-full h-full border-none"></iframe> */}
     </div>
   );
 }

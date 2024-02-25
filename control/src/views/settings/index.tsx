@@ -42,11 +42,9 @@ function SettingsTab({ children, disabled }: SettingsTabProps) {
   );
 }
 
-export function SettingsPage() {
+export function SettingsView() {
   return (
     <div className="SettingsPage w-full h-full flex justify-stretch">
-      {/* <div className="Tabs w-1/4 p-4">H</div>
-      <div className="bg-gray-950 grow"></div> */}
       <Tab.Group>
         <Tab.List className="w-[400px] flex flex-col py-4 px-3 overflow-y-auto max-h-full">
           <SettingsTab>

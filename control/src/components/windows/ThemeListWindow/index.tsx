@@ -6,7 +6,7 @@ import { classNames } from "../../../utils";
 
 type Props = {
   themes: Theme[];
-  activeSlide?: Slide | null;
+  activeSlide?: Slide;
   onSlideSelect?: (slide: Slide) => any;
 };
 

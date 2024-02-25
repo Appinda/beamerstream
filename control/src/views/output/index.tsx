@@ -1,10 +1,11 @@
 import { ReactNode } from "react";
-import { useDefaultStore } from "../../stores/DefaultStore";
+
 import { Slide } from "@beamerstream/common";
 import { TextLayer, ColorLayer, ImageLayer } from "./layers";
+import { useServer } from "../../hooks/useServer";
 
-export default function Screen() {
-  const [currentSlide] = useDefaultStore((state) => [state.currentSlide]);
+export default function OutputView() {
+  const server = useServer();
 
   // const lyrics = useRef<SVGTextElement>(null);
   const fontSize = 100;
@@ -108,7 +109,7 @@ export default function Screen() {
         viewBox={`0 0 ${screenSize[0]} ${screenSize[1]}`}
         overflow="hidden"
       >
-        {currentSlide && renderLayers(currentSlide)}
+        {server.currentSlide && renderLayers(server.currentSlide)}
         {/* <defs>
           <rect
             id="rect"

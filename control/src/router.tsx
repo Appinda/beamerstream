@@ -1,11 +1,17 @@
 import { Navigate, createHashRouter } from "react-router-dom";
-import Screen from "./pages/screen";
-import { AppLayout, ScreenLayout } from "./layouts";
-import { ControlPage, SettingsPage, SongsPage, ThemesPage } from "./pages/app";
+import AppLayout from "./layouts/AppLayout";
+import RootLayout from "./layouts/RootLayout";
+import ScreenLayout from "./layouts/ScreenLayout";
+import { ControlView } from "./views/control";
+import { SongsView } from "./views/songs";
+import { ThemesView } from "./views/themes";
+import { SettingsView } from "./views/settings";
+import OutputView from "./views/output";
 
 const router = createHashRouter([
   {
     path: "/",
+    element: <RootLayout />,
     children: [
       {
         path: "",
@@ -21,19 +27,19 @@ const router = createHashRouter([
           },
           {
             path: "control",
-            element: <ControlPage />,
+            element: <ControlView />,
           },
           {
             path: "songs",
-            element: <SongsPage />,
+            element: <SongsView />,
           },
           {
             path: "themes",
-            element: <ThemesPage />,
+            element: <ThemesView />,
           },
           {
             path: "settings",
-            element: <SettingsPage />,
+            element: <SettingsView />,
           },
         ],
       },
@@ -46,12 +52,8 @@ const router = createHashRouter([
             element: <Navigate to="/output/live" />,
           },
           {
-            path: "live",
-            element: <Screen />,
-          },
-          {
-            path: "preview",
-            element: <Screen />,
+            path: ":name",
+            element: <OutputView />,
           },
         ],
       },

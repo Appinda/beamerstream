@@ -1,15 +1,15 @@
 import { MusicNoteBeamed } from "react-bootstrap-icons";
-import { useDefaultStore } from "../../../stores/DefaultStore";
+import { useServer } from "../../../hooks/useServer";
 
 type LiturgyProps = {
   onSelectItem?: (id: string) => void;
 };
 
 export function ServiceWindow({ onSelectItem }: LiturgyProps) {
-  const [service] = useDefaultStore((state) => [state.service]);
+  const server = useServer();
 
   function renderSonglist() {
-    return service.items.map((item, i) => (
+    return server.service.items.map((item, i) => (
       <div
         className="cursor-pointer hover:bg-slate-700 px-1 select-none flex"
         key={i}

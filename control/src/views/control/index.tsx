@@ -1,25 +1,16 @@
 import { useState, useRef } from "react";
 import * as FlexLayout from "flexlayout-react";
 import { ScreenPreview } from "../../components";
-import { useDefaultStore } from "../../stores/DefaultStore";
+
 import {
   ActiveSlidesWindow,
   SearchWindow,
   ServiceWindow,
 } from "../../components/windows";
+import { useServer } from "../../hooks/useServer";
 
-export function ControlPage() {
-  // function selectSlide(index: number) {
-  //   mutateFunction({
-  //     variables: {
-  //       text: DUMMY_SONG[index],
-  //     },
-  //   });
-  // }
-
-  const [currentServiceItem] = useDefaultStore((state) => [
-    state.currentServiceItem,
-  ]);
+export function ControlView() {
+  const server = useServer();
 
   function onLituryItemSelect(id: string) {
     alert(id);
@@ -102,7 +93,7 @@ export function ControlPage() {
       case "Service":
         return <ServiceWindow onSelectItem={onLituryItemSelect} />;
       case "ActiveSlides":
-        return <ActiveSlidesWindow slides={currentServiceItem?.slides} />;
+        return <ActiveSlidesWindow slides={server.slides} />;
       case "Search":
         return <SearchWindow />;
       case "Screen":
@@ -114,6 +105,7 @@ export function ControlPage() {
 
   return (
     <div className="ControlPage h-full">
+      {JSON.stringify(server.slides)}
       <FlexLayout.Layout
         model={model}
         factory={factory}

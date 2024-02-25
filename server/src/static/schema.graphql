@@ -1,18 +1,18 @@
 type Layer {
-  id: String!
+  id: ID!
   text: String
   color: String
   src: String
 }
 
 type Slide {
-  id: String!
+  id: ID!
   name: String!
   layers: [Layer]!
 }
 
 type ServiceItem {
-  id: String!
+  id: ID!
   slides: [Slide]!
   name: String!
 }
@@ -23,7 +23,7 @@ type Verse {
 }
 
 type Song {
-  id: String!
+  id: ID!
   created: Float!
   modified: Float!
   titles: [String]!
@@ -67,7 +67,7 @@ type Display {
 }
 
 type Theme {
-  id: String!
+  id: ID!
   created: Float!
   modified: Float!
   name: String!
@@ -77,9 +77,8 @@ type Theme {
 type Query {
   "List of songs"
   songs: [Song]!
-  song(id: String!): Song
-  currentSong: Song
-  currentVerse: String
+  song(id: ID!): Song
+  currentSlide: Slide
 
   themes: [Theme]!
   currentTheme: Theme
@@ -91,6 +90,7 @@ type Query {
 
 type Mutation {
   setCurrentVerse(text: String!): String
+  setDefaultTheme(id: ID!): Boolean
 }
 
 type Subscription {
