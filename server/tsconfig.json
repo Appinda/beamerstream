@@ -15,6 +15,5 @@
     "declaration": true
   },
   "exclude": ["./dist"],
-  "include": ["./src/**/*.*"],
-  "files": ["src/typings.d.ts"]
+  "include": ["./src/**/*.*"]
 }

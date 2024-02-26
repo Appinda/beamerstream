@@ -1,28 +1,35 @@
 import { Outlet } from "react-router-dom";
 import ServerContextProvider from "../contexts/ServerContextProvider";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
-import { createClient } from "graphql-ws";
-
-const wsLink = new GraphQLWsLink(
-  createClient({
-    url: "ws://localhost:3000/graphql",
-  })
-);
-
-const client = new ApolloClient({
-  link: wsLink,
-  cache: new InMemoryCache(),
-});
+import { useState } from "react";
+import { QueryClient } from "@tanstack/react-query";
+import { trpc } from "../trpc";
+import { httpBatchLink } from "@trpc/client";
 
 export default function RootLayout() {
+  const [queryClient] = useState(() => new QueryClient());
+  const [trpcClient] = useState(() =>
+    trpc.createClient({
+      links: [
+        httpBatchLink({
+          url: "http://localhost:3000/trpc",
+          // You can pass any HTTP headers you wish here
+          // async headers() {
+          //   return {
+          //     authorization: getAuthCookie(),
+          //   };
+          // },
+        }),
+      ],
+    })
+  );
+
   return (
     <div className="RootLayout w-screen h-screen overflow-hidden">
-      <ApolloProvider client={client}>
+      <trpc.Provider client={trpcClient} queryClient={queryClient}>
         <ServerContextProvider>
           <Outlet />
         </ServerContextProvider>
-      </ApolloProvider>
+      </trpc.Provider>
     </div>
   );
 }

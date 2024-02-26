@@ -4,6 +4,7 @@ type Props = {
 
 export function ScreenPreview({ screen }: Props) {
   const url = `#/output/${screen}`;
+  console.log(url);
 
   return (
     <div className="ScreenPreview w-full aspect-video">

@@ -8,6 +8,7 @@
     "build": "rimraf dist && pkgroll",
     "watch": "pkgroll --watch"
   },
+  "types": "./dist/index.d.ts",
   "exports": {
     "types": "./dist/index.d.ts"
   },

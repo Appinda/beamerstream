@@ -104,8 +104,7 @@ export function ControlView() {
   }
 
   return (
-    <div className="ControlPage h-full">
-      {JSON.stringify(server.slides)}
+    <div className="ControlView h-full">
       <FlexLayout.Layout
         model={model}
         factory={factory}
