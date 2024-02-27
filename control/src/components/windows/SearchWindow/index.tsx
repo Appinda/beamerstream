@@ -1,37 +1,27 @@
-import { useServer } from "../../../hooks/useServer";
-import { ContextMenu } from "../../ContextMenu";
-
-type SearchFilter = "songs";
+import { Song } from "@beamerstream/common";
+import classNames from "classnames";
 
 type Props = {
-  filter?: SearchFilter[];
+  items: Song[];
+  activeItem?: Song;
+  onSelect?: (song: Song) => any;
 };
 
-export function SearchWindow({ filter = [] }: Props) {
-  const server = useServer();
-
+export function SearchWindow({ items = [], activeItem, onSelect }: Props) {
   return (
     <div className="SearchWindow w-full select-none">
-      {server.songs.map((song) => (
-        <ContextMenu
+      {items.map((song) => (
+        <div
+          className={classNames(
+            "hover:bg-gray-200 active:bg-gray-300 cursor-pointer px-2",
+            { "active bg-blue-100": activeItem && song.id == activeItem.id }
+          )}
           key={song.id}
-          menu={[
-            {
-              name: "Delete",
-              onClick: () => server.deleteSong(song.id!),
-            },
-          ]}
+          onClick={() => onSelect?.(song)}
         >
-          <div
-            className="hover:bg-gray-200 active:bg-gray-300 cursor-pointer px-2 py-1"
-            key={song.id}
-            onClick={() => server.viewSlides(song.id!)}
-          >
-            {song.titles![0]}
-          </div>
-        </ContextMenu>
+          {song.titles![0]}
+        </div>
       ))}
-      {filter}
     </div>
   );
 }

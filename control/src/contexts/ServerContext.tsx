@@ -2,7 +2,7 @@ import { Service, Slide, Song, Theme } from "@beamerstream/common";
 import { createContext } from "react";
 
 export type ServerContextType = {
-  songs: Partial<Song>[];
+  songs: Song[];
   deleteSong: (id: string) => boolean;
 
   currentSlide: Slide | null;

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { LinkProps, NavLink } from "react-router-dom";
-import { classNames } from "../../utils";
+import classNames from "classnames";
 import {
   Display,
   GearFill,

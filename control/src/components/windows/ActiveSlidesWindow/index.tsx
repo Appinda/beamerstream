@@ -1,7 +1,7 @@
 import { HTMLProps } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
-import { classNames } from "../../../utils";
+import classNames from "classnames";
 import { Slide } from "@beamerstream/common";
 import { SlidePreview } from "../../SlidePreview";
 import { useClientState } from "../../../hooks/useClientState";

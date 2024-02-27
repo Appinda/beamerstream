@@ -2,7 +2,7 @@ import { Slide, Theme } from "@beamerstream/common";
 import { SlidePreview } from "../..";
 import { Disclosure } from "@headlessui/react";
 import { ChevronRight } from "react-bootstrap-icons";
-import { classNames } from "../../../utils";
+import classNames from "classnames";
 
 type Props = {
   themes: Theme[];

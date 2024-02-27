@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ContextMenuData from "./model";
-import { classNames } from "../../utils";
+import classNames from "classnames";
 import { ContextContext, ContextMenuManager } from "./context";
 
 export function ContextMenuOutlet({

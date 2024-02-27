@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Tab } from "@headlessui/react";
-import { IS_DESKTOP, classNames } from "../../utils";
+import { IS_DESKTOP } from "../../utils";
 import {
   Cloud,
   Database,
@@ -15,6 +15,7 @@ import {
   OnlineTab,
   ShortcutsTab,
 } from "./settings";
+import classNames from "classnames";
 
 type SettingsTabProps = {
   children: ReactNode;

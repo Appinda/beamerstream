@@ -1,7 +1,3 @@
-export function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export const IS_DESKTOP = "electron" in window;
 
 export const DUMMY_SONG = [

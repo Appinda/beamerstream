@@ -1,6 +1,6 @@
 import { HTMLProps, useEffect, useState } from "react";
 import { PhysicalDisplay } from "@beamerstream/common";
-import { classNames } from "../../../utils";
+import classNames from "classnames";
 
 type DisplayProps = HTMLProps<HTMLDivElement> & {
   display: PhysicalDisplay;

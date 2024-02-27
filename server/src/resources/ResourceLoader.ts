@@ -36,6 +36,7 @@ export default class ResourceLoader {
   }
 
   private async initDataDirectory(directory: string) {
+    console.log(`Opening data directory: "${directory}"`);
     if (!fs.existsSync(directory)) {
       await fs.promises.mkdir(directory);
       await Promise.allSettled([
@@ -68,6 +69,7 @@ export default class ResourceLoader {
   }
 
   async init() {
+    console.log("Loading resources..");
     await this.initDataDirectory(this._dataDirectory);
     await this.initSongs();
   }
